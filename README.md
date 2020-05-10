@@ -6,6 +6,8 @@ dataloaders.py: ミニバッチを生成するために必要なデータロー�
 
 datasets.py: データセットを生成するためのクラスが実装されている。 `prepare()` で整形ができる。
 
+device.py: GPU使用か否かを決定するためのコード
+
 main.py: このコードを実行することで、DLが回る
 
 modules.py: encoderとAttention decoderが実装されている。こちらはmodels.pyと書いてもよかったかもしれない...
