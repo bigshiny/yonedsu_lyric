@@ -45,8 +45,9 @@ class DataLoader:
 
 
 class SeqDataLoader(DataLoader):
-    def __init__(self, dataset, batch_size, shuffle):
+    def __init__(self, dataset, batch_size, shuffle, reverse):
         super().__init__(dataset=dataset, batch_size=batch_size, shuffle=False)
+        self.reverse = reverse
 
     def __next__(self):
         if self.iteration >= self.max_iter:
@@ -58,6 +59,8 @@ class SeqDataLoader(DataLoader):
                        range(self.batch_size)]
         batch_x = [self.dataset[0][i] for i in batch_index]
         batch_t = [self.dataset[1][i] for i in batch_index]
+        if self.reverse:
+            batch_x = [line[::-1] for line in batch_x]
 
         x = torch.tensor(batch_x, device=device)
         t = torch.tensor(batch_t, device=device)
