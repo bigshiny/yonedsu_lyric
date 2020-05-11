@@ -144,5 +144,7 @@ for test_x, test_y in test_dataloader:
             decoder_input_tensor = get_max_index(decoder_output.squeeze(), BATCH_NUM)
             batch_tmp = torch.cat([batch_tmp, decoder_input_tensor], dim=1)
         predicts = batch_tmp[:,1:]  # 予測されたものをバッチごと受け取る
+        if test_dataloader.reverse:
+            test_x = [list(line)[::-1] for line in test_x]  # 反転されたものをもどす
         df = predict2df(test_x, test_y, predicts, df)
 df.to_csv("predict_yonedsu_lyric.csv", index=False)
